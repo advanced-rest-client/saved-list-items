@@ -27,7 +27,8 @@
     "paper-button": "PolymerElements/paper-button#^1.0.13",
     "iron-flex-layout": "PolymerElements/iron-flex-layout#^1.3.1",
     "iron-dropdown": "PolymerElements/iron-dropdown#^1.5.2",
-    "iron-scroll-threshold": "PolymerElements/iron-scroll-threshold#^1.0.2"
+    "iron-scroll-threshold": "PolymerElements/iron-scroll-threshold#^1.0.2",
+    "chance": "chancejs/chancejs#^1.0.4"
   },
   "devDependencies": {
     "iron-component-page": "polymerelements/iron-component-page#1.0.0",
@@ -47,8 +48,7 @@
     "form-action-bar": "advanced-rest-client/form-action-bar#^1.0.3",
     "paper-toggle-button": "PolymerElements/paper-toggle-button#^1.2.1",
     "app-pouchdb": "advanced-rest-client/app-pouchdb#^0.9.3",
-    "uuid-generator": "advanced-rest-client/uuid-generator#^1.0.3",
-    "chance": "chancejs/chancejs#^1.0.4"
+    "uuid-generator": "advanced-rest-client/uuid-generator#^1.0.3"
   },
   "ignore": [
     "**/.*",
@@ -58,5 +58,5 @@
     "test",
     "tasks"
   ],
-  "version": "0.0.1"
+  "version": "0.0.3"
 }
