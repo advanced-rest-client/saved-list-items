@@ -1,6 +1,6 @@
 {
   "name": "saved-list-items",
-  "description": "Insert description here.",
+  "description": "Component to display list of saved requiests",
   "authors": [
     "The Advanced REST client authors <arc@mulesoft.com>"
   ],
@@ -58,5 +58,5 @@
     "test",
     "tasks"
   ],
-  "version": "0.0.3"
+  "version": "1.0.1"
 }
