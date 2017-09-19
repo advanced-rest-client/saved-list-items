@@ -1,3 +1,9 @@
+<a name="1.1.3"></a>
+## [1.1.3](https://github.com/advanced-rest-client/saved-list-items/compare/1.1.2...1.1.3) (2017-09-19)
+
+
+
+
 <a name="1.1.2"></a>
 ## [1.1.2](https://github.com/advanced-rest-client/saved-list-items/compare/1.1.1...1.1.2) (2017-09-19)
 
