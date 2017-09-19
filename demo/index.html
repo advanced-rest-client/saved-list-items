@@ -69,7 +69,8 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
           on-list-item-name-changed="_nameChanged"
           on-list-items-export="_onExport"
           on-list-items-search="_onSearch"
-          on-list-items-selection-changed="_selChanged"></saved-list-items>
+          on-list-items-selection-changed="_selChanged"
+          on-list-item-details="_onDetails"></saved-list-items>
       </section>
 
       <section card>
@@ -99,6 +100,11 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
     app._onOpen = (e) => {
       let msg = 'Open item #' + e.detail.index;
       msg += ` (${e.detail.item.method} ${e.detail.item.url})`;
+      app.log(msg);
+      console.log(e);
+    };
+    app._onDetails = (e) => {
+      let msg = 'Details requested for ' + e.detail.item.url;
       app.log(msg);
       console.log(e);
     };

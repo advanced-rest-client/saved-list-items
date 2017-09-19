@@ -190,7 +190,7 @@ You can style checkbox with paper-checkbox styles like:
               <div>[[item.url]]</div>
               <div secondary><span data-action="name-edit" class="name" on-tap="_editName">[[item.name]]</span></div>
             </paper-item-body>
-            <paper-button class="secondary-action" data-action="delete-item" on-tap="_deleteItem">Delete</paper-button>
+            <paper-button class="secondary-action" data-action="item-detail" on-tap="_requestDetails">Details</paper-button>
             <paper-button class="main-action" data-action="open-item" on-tap="_navigateItem" raised>Open</paper-button>
           </paper-icon-item>
         </div>
@@ -272,6 +272,11 @@ You can style checkbox with paper-checkbox styles like:
      * @param {Object} item An object associated with this item.
      * @param {Number} index Object's index in the list.
      */
+    /**
+     * Fired when the "request details" has been requested via this UI.
+     * @event list-item-details
+     * @param {Object} item An object associated with this item.
+     */
     properties: {
       // The list of saved items to render.
       items: Array,
@@ -341,10 +346,14 @@ You can style checkbox with paper-checkbox styles like:
       return selected ? 'selected' : '';
     },
 
-    // Called to delete single item from the list
-    _deleteItem: function(e) {
-      var items = [e.model.get('item')];
-      this.__deleteItems(items);
+    // Called to request details panel for the list item
+    _requestDetails: function(e) {
+      var item = e.model.get('item');
+      this.fire('list-item-details', {
+        item: item
+      }, {
+        bubbles: false
+      });
     },
 
     // Handler for tap action on the "open" button
