@@ -58,19 +58,18 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         }, 100);
       });
 
-      test('Fires list-items-delete custom event', function() {
+      test('Fires list-item-details custom event', function() {
         var eventData;
         var cnt = 0;
-        element.addEventListener('list-items-delete', function(e) {
+        element.addEventListener('list-item-details', function(e) {
           eventData = e.detail;
           cnt++;
         });
-        var node = actionElement('delete-item');
+        var node = actionElement('item-detail');
         MockInteractions.tap(node);
         assert.typeOf(eventData, 'object', 'Event was fired');
         assert.equal(cnt, 1, 'Event called once');
-        assert.typeOf(eventData.items, 'array', 'Event contains list of items');
-        assert.lengthOf(eventData.items, 1, 'Event contain one item');
+        assert.typeOf(eventData.item, 'object', 'Event contains an item');
       });
 
       test('Fires list-items-delete custom event on multiple items', function() {
@@ -91,25 +90,6 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         assert.equal(cnt, 1, 'Event called once');
         assert.typeOf(eventData.items, 'array', 'Event contains list of items');
         assert.lengthOf(eventData.items, 3, 'Event contain one item');
-      });
-
-      test('Fires list-items-delete for single item when selection is applied', function() {
-        var eventData;
-        var cnt = 0;
-        element.addEventListener('list-items-delete', function(e) {
-          eventData = e.detail;
-          cnt++;
-        });
-        element.$.list.selectItem(0);
-        element.$.list.selectItem(1);
-        element.$.list.selectItem(2);
-        TestHelpers.forceXIfStamp(element);
-
-        var node = actionElement('delete-item');
-        MockInteractions.tap(node);
-        assert.typeOf(eventData, 'object', 'Event was fired');
-        assert.equal(cnt, 1, 'Event called once');
-        assert.lengthOf(eventData.items, 1, 'Event contain one item');
       });
 
       test('Fires list-item-open custom event', function() {
