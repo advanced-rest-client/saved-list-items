@@ -1,21 +1,22 @@
 language: node_js
-sudo: required
-dist: trusty
 node_js: stable
 before_script:
-- npm install -g bower polylint web-component-tester
-- bower install
+- bower install --silent
 addons:
-  firefox: '46.0'
-  apt:
-    sources:
-    - google-chrome
-    packages:
-    - google-chrome-stable
   sauce_connect: true
 script:
-- polylint
-- xvfb-run wct
+- npm run lint
+- polymer test --plugin sauce --job-name "saved-list-items:${TRAVIS_BRANCH}" --build-number=${TRAVIS_BUILD_NUMBER}
 cache:
   directories:
-  - bower_components
+  - node_modules
+branches:
+  only:
+  - stage
+  - develop
+after_success:
+- node tasks/ci.js
+env:
+  global:
+  - secure: h/Fl1+ik5FH6sKq4hR7DvafqGmU2xdonmQCnqA4yQac7b3z01rxiI2R/c3VcSWUmBhiCyMFMh+I2PHdkAS7Iz7J6fBcr/zgWhfgdbk2fHbBBZemsW6pvxL1TkuNRrMiOGKrsAA8a2MxYi8SFg36fUnFZgnvawdX2yxgDxxVsAC2SrRHEQO4/9UatAD1VE2g6e7bRXlG8ldebHX6zWQug5LGqovWQ4w3ktInWMaBGOh4HNIHa9Y32Xqn9AVJEr9ctvhFDwsydHIAul2pjkX4PJPbAhW/EHuzZLZQdDuqTO8hm75gyOepnyqEgL3l6+tFMX/RYD5BDXuo4+FLyfZ2TZftswRP33LIy8Xzbor/jJcYEC2GD/EdFPD/XbZR1DSl4QlOVxJWsdltYrVd788rIPV6V8RW/WuUNv6q/SkNczdrgJ98fQcM/TDMtmEBugHl88MvBtpF6md8rWXjGg2sn1IcQSDvILG1vcN/N/9YKrVXwwJrLGJOWZsB2GjOBD3E5uHmCoMe0QUjEUOm0eNIdAA2ZFNw8iRK6BbvKw58x3Vp3Kq0a7CbWCmzKRzOcZSdEF7+iKdpqn+tTDD5OPdVZBIP2zfnIE30dp+XwEzfrnFHHY3wRcc7CjrlQbbPk5O41FJIMw1sSSG869BHqIgiAxPidJ6AOmmJLdwZ5EgKnVZk=
+  - secure: qvjlGfonbEJMC1f/dcheXXrHBBHZ9mFgHE/Ev3MUPyFqtMzlYz2DZ/LmJLljzDm5FTh/Sn4/+FxeBNuylxa8UGQX/hW39OmQZVapZz6aNSq3bee4E1fsnfRDbr04g+BmTpO+RHqxpZ96xtlJK6CMyd6ZbynNPd9bV1LDTxBm0da3xjZrH4wyUXQOx+RRL4JPPYqLDgGvbYz7PC1SEhAOlLbA0dPOOHs+Urtb0+IU75QHtr/9FgFjQbQptEqQyTP2Fo5htg7ev9B5+c6zklntLXzweWunPKS+2uuPVuXe3u+o6MciGfZYie67GPFTZ5AuaOVxKU2v/4tSndCZEtDyw8oIDKeRMeotCxtign/20wJ4IJ+v4L1dGzupzgAIS0UcO8Fgv7ob0vEzBDOJKRAt9O0DjbeB7bJFGtlyHs05h+1pKBDv1poX8Yx7hqGDBoLiXWbRod3u6fNaIE/2I+FaovYNb0QcNfTFF4sQ250U8AseIKsx/HOLZygHJmG6bKTz2svn7KmBotQC8vxpvGr4M/Jd+Cn7tmOQk4CFEZLo+6rezSA0fHEYzCnGCEnOj8xINV1Ql+iQCAOykM3WdglOZhwhQA+fKt7/9AmMMJRr1PO++Wdeq64H0A88/z9rEc+jkjkbOknBpYt25PoXbp3dV5tj7XsgH4TIEDF1tsuXxS8=
