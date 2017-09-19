@@ -1,3 +1,6 @@
+[![Build Status](https://travis-ci.org/advanced-rest-client/saved-list-items.svg?branch=stage)](https://travis-ci.org/advanced-rest-client/saved-list-items)  
+
+# saved-list-items
 
 A `<saved-list-items>` element renders a list of fistory items.
 
@@ -58,11 +61,14 @@ You can style checkbox with paper-checkbox styles like:
 ### Events
 | Name | Description | Params |
 | --- | --- | --- |
-| saved-list-item-delete | Fired when the user clicked on a delete button on an item. | item **Object** - An object associated with this item. |
+| list-item-name-changed | Fired when the name of an item has changed in the UI and the changed schold be commited to the datastore.  The event does not bubbles. | item **Object** - An object associated with this item. |
 index **Number** - Object's index in the list. |
-| saved-list-item-name-changed | Fired when the name of an item has changed. Handler is responsible for updating the state of the list outside this element (since changes are not propagated outside this element) and for storing relevant data to the datastore. | item **Object** - An object associated with this item. |
+| list-item-open | Fired when the user clicked on an open button on an item.  The event does not bubbles. | item **Object** - An object associated with this item. |
 index **Number** - Object's index in the list. |
-value **String** - New value of the name. |
-| saved-list-item-open | Fired when the user clicked on an open button on an item. | item **Object** - An object associated with this item. |
-index **Number** - Object's index in the list. |
-| saved-list-threshold | Fired when the user nearly scrolled to the ened of the list. It usually means that the app should load more results. | __none__ |
+| list-items-delete | Fired when the user clicked on a delete button on an item or delete selected in the table header.  The event does not bubbles. | items **Array** - List of items to be deleted. Each item is a request object as passed to the `items` array. |
+| list-items-export | Fires when the user selects to export currently selected items.  The event does not bubbles. | items **Array** - List of items to be deleted. Each item is a request object as passed to the `items` array. |
+| list-items-search | Fired when the user search the list.  The event does not bubbles. | q **String** - Search query. Can be empty when cleared. |
+| list-items-selection-changed | Fired when single item selection has changed. It isn't fired when multiple selection has changed at once.  The event does not bubbles. | item **Object** - The request object |
+index **Number** - Index of the item on the list |
+selected **Boolean** - Whether the item is selected or not. |
+| list-items-threshold | Fired when the user nearly scrolled to the ened of the list. It usually means that the app should load more results.  The event does not bubbles. | __none__ |
