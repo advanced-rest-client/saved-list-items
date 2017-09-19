@@ -196,7 +196,7 @@ You can style checkbox with paper-checkbox styles like:
         </div>
       </template>
     </iron-list>
-    <iron-scroll-threshold id="scrollTheshold" lower-threshold="[[threshold]]" on-lower-threshold="_thresholdReached" scroll-target="list"></iron-scroll-threshold>
+    <iron-scroll-threshold id="scrollTheshold" lower-threshold="[[threshold]]" on-lower-threshold="_thresholdReached" scroll-target="[[_scrollTarget]]"></iron-scroll-threshold>
     <iron-dropdown id="nameChange" always-on-top focus-target="[[_nameInput]]" on-iron-overlay-closed="_nameEditorClosed">
       <div class="dropdown-content name-change-popover">
         <paper-input label="Request name" id="nameChangeInput" on-keydown="_nameKeyDown"></paper-input>
@@ -314,6 +314,13 @@ You can style checkbox with paper-checkbox styles like:
       keyword: {
         type: String,
         notify: true
+      },
+      // List scroll target for the threshold.
+      _scrollTarget: {
+        type: Object,
+        value: function() {
+          return this.$.list;
+        }
       }
     },
 
