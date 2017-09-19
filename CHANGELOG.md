@@ -1,3 +1,13 @@
+<a name="1.1.2"></a>
+## [1.1.2](https://github.com/advanced-rest-client/saved-list-items/compare/1.1.1...1.1.2) (2017-09-19)
+
+
+### Update
+
+* Updated the element for new design ([e93b23d22f8b8550002925deff12da3fa73693ae](https://github.com/advanced-rest-client/saved-list-items/commit/e93b23d22f8b8550002925deff12da3fa73693ae))
+
+
+
 <a name="1.1.1"></a>
 ## [1.1.1](https://github.com/advanced-rest-client/saved-list-items/compare/0.0.2...1.1.1) (2017-09-19)
 

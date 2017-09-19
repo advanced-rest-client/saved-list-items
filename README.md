@@ -61,6 +61,7 @@ You can style checkbox with paper-checkbox styles like:
 ### Events
 | Name | Description | Params |
 | --- | --- | --- |
+| list-item-details | Fired when the "request details" has been requested via this UI. | item **Object** - An object associated with this item. |
 | list-item-name-changed | Fired when the name of an item has changed in the UI and the changed schold be commited to the datastore.  The event does not bubbles. | item **Object** - An object associated with this item. |
 index **Number** - Object's index in the list. |
 | list-item-open | Fired when the user clicked on an open button on an item.  The event does not bubbles. | item **Object** - An object associated with this item. |
