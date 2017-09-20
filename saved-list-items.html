@@ -69,6 +69,8 @@ Custom property | Description | Default
 `--saved-list-item-selected-background-color` | Selection color for list items. | `#E0E0E0`
 `--saved-list-items-selection-counter` | Mixin applied to the selection counter | `{}`
 `--saved-list-items-search-input` | Mixin applied to the search input | `{}`
+`--saved-list-items-header` | Mixin applied to the list header options section. | `{}`
+`--saved-list-items-list` | Mixin applied to the list (`iron-list`) | `{}`
 `--action-button` | Mixin apllied to the primary action buttons | `{}`
 `--secondary-action-button-color` | Color of the secondary action button | `--primary-color`
 `--arc-font-body1` | Mixin applied to the element | `{}`
@@ -129,6 +131,7 @@ Custom property | Description | Default
       @apply --layout-center;
       padding-left: 16px;
       margin: 24px 0;
+      @apply --saved-list-items-header;
     }
 
     .table-options .hiddable {
@@ -175,6 +178,7 @@ Custom property | Description | Default
 
     iron-list {
       flex: 1 1 auto;
+      @apply --saved-list-items-list;
     }
     </style>
     <section class$="table-options [[_computeOptionsTableClass(hasSelection)]]">
