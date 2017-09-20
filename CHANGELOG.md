@@ -1,3 +1,14 @@
+<a name="0.1.1"></a>
+## 0.1.1 (2017-09-20)
+
+
+### Update
+
+* Added sauce configuration for tests ([0dceb4cd80f1e5a1013353ca571ae690954f641d](https://github.com/advanced-rest-client/saved-list-items/commit/0dceb4cd80f1e5a1013353ca571ae690954f641d))
+* Added sauce configuration for tests ([d99767894cb23e2e7c293effcd7358633decae15](https://github.com/advanced-rest-client/saved-list-items/commit/d99767894cb23e2e7c293effcd7358633decae15))
+
+
+
 <a name="1.1.7"></a>
 ## [1.1.7](https://github.com/advanced-rest-client/saved-list-items/compare/1.1.6...1.1.7) (2017-09-20)
 
