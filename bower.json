@@ -1,7 +1,7 @@
 {
   "name": "saved-list-items",
   "description": "List items view for ARC saved items",
-  "version": "1.1.4",
+  "version": "1.1.5",
   "authors": [
     "The Advanced REST client authors <arc@mulesoft.com>"
   ],
