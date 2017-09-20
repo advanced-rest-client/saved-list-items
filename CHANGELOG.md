@@ -1,3 +1,14 @@
+<a name="1.1.4"></a>
+## [1.1.4](https://github.com/advanced-rest-client/saved-list-items/compare/1.1.3...1.1.4) (2017-09-20)
+
+
+### Fix
+
+* Fixed scroll target recognition in the element. ([a36920c0c311e8a86e74307ee1114c0f069e07d7](https://github.com/advanced-rest-client/saved-list-items/commit/a36920c0c311e8a86e74307ee1114c0f069e07d7))
+* Forcing iron-list to re render when items size change ([146132e737fe52d520a5dbf8fe92e1d30db41295](https://github.com/advanced-rest-client/saved-list-items/commit/146132e737fe52d520a5dbf8fe92e1d30db41295))
+
+
+
 <a name="1.1.3"></a>
 ## [1.1.3](https://github.com/advanced-rest-client/saved-list-items/compare/1.1.2...1.1.3) (2017-09-19)
 
