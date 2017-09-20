@@ -345,6 +345,7 @@ You can style checkbox with paper-checkbox styles like:
       if (length) {
         this.async(() => {
           this.$.scrollTheshold.clearTriggers();
+          this.$.list.fire('iron-resize');
         }, 1);
       }
     },
