@@ -39,22 +39,18 @@ paths each time the new element will be added.
 Custom property | Description | Default
 ----------------|-------------|----------
 `--saved-list-items` | Mixin applied to each list item | `{}`
-`--saved-list-items-url` | Mixin applied to the URL display element. Note that it is a inline element. | `{}`
-`--saved-list-items-method` | Mixin applied to the method display element. Note that it is a inline element. | `{}`
-`--saved-list-items-height` | Height of the list item. | `60px`
-`--saved-list-items-background-color` | Background color of the list. | `transparent`
-`--saved-list-items-selected-background-color` | Selection color for list items. | `#E0E0E0`
-`--saved-list-items-meta-row-color` | Font color of the bottom "meta" row (the one with time information.) | `#757575`
-`--saved-list-items-meta-row-font-size` | Font size of the bottom "meta" row (the one with time information.) | `12px`
-`--saved-list-items-open-background-color` | Background color of the "open" button. | `#1E88E5`
-`--saved-list-items-open-color` | Font color of the "open" button. | `white`
-
-You can style checkbox with paper-checkbox styles like:
-```
-:host {
-  --paper-checkbox-checked-color: #1E88E5;
-}
-```
+`--saved-list-items-url-label` | Mixin applied to the URL label element | `{}`
+`--saved-list-items-name-label` | Mixin applied to the request name label element | `{}`
+`--saved-list-items-method-label` | Mixin applied to the method label element. | `{}`
+`--saved-list-items-method-label-container` | Mixin applied to the method label parent container element. | `{}`
+`--saved-list-item` | Mixin applied to the list item | `{}`
+`--saved-list-item-selected` | Mixin applied to the selected list item | `{}`
+`--saved-list-item-selected-background-color` | Selection color for list items. | `#E0E0E0`
+`--saved-list-items-selection-counter` | Mixin applied to the selection counter | `{}`
+`--saved-list-items-search-input` | Mixin applied to the search input | `{}`
+`--action-button` | Mixin apllied to the primary action buttons | `{}`
+`--secondary-action-button-color` | Color of the secondary action button | `--primary-color`
+`--arc-font-body1` | Mixin applied to the element | `{}`
 
 
 
