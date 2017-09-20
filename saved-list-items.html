@@ -518,7 +518,6 @@ You can style checkbox with paper-checkbox styles like:
       } else {
         this.$.list.deselectItem(item);
       }
-      console.log('_onSelectItem', selected, e.event.type);
       this.fire('list-items-selection-changed', {
         item: item,
         index: model.get('index'),
