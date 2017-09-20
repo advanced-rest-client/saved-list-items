@@ -340,12 +340,16 @@ You can style checkbox with paper-checkbox styles like:
     hostAttributes: {
       'role': 'list'
     },
+    // Notifies the list about the change. It re-renders the items.
+    refresh: function() {
+      this.$.list.fire('iron-resize');
+    },
     // Clears scroll treshold triggers when size of the items array change.
     _sizeChanged: function(length) {
       if (length) {
         this.async(() => {
           this.$.scrollTheshold.clearTriggers();
-          this.$.list.fire('iron-resize');
+          this.refresh();
         }, 1);
       }
     },
@@ -518,7 +522,6 @@ You can style checkbox with paper-checkbox styles like:
       } else {
         this.$.list.deselectItem(item);
       }
-      console.log('_onSelectItem', selected, e.event.type);
       this.fire('list-items-selection-changed', {
         item: item,
         index: model.get('index'),

@@ -1,3 +1,17 @@
+<a name="1.1.6"></a>
+## [1.1.6](https://github.com/advanced-rest-client/saved-list-items/compare/1.1.5...1.1.6) (2017-09-20)
+
+
+### New
+
+* Added refresh method to the element. ([656ad58945d75bbafec0f08ae47d63d059d0e032](https://github.com/advanced-rest-client/saved-list-items/commit/656ad58945d75bbafec0f08ae47d63d059d0e032))
+
+### Update
+
+* Removed debug statement. ([10a2a283808e48dd98086956898713c3059867ec](https://github.com/advanced-rest-client/saved-list-items/commit/10a2a283808e48dd98086956898713c3059867ec))
+
+
+
 <a name="1.1.5"></a>
 ## [1.1.5](https://github.com/advanced-rest-client/saved-list-items/compare/1.1.4...1.1.5) (2017-09-20)
 
