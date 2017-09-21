@@ -130,6 +130,7 @@ Custom property | Description | Default
       @apply --layout-horizontal;
       @apply --layout-center;
       padding-left: 16px;
+      padding-bottom: 24px;
       margin: 24px 0;
       @apply --saved-list-items-header;
     }
@@ -180,6 +181,12 @@ Custom property | Description | Default
       flex: 1 1 auto;
       @apply --saved-list-items-list;
     }
+
+    .empty-info {
+      margin-left: 16px;
+      font-size: 16px;
+      @apply --empty-info;
+    }
     </style>
     <section class$="table-options [[_computeOptionsTableClass(hasSelection)]]">
       <span>
@@ -195,7 +202,10 @@ Custom property | Description | Default
         <paper-input label="Search" no-label-float value="{{keyword}}" type="search" on-search="_searchList"></paper-input>
       </div>
     </section>
-    <iron-list id="list" items="[[items]]" selected-items="{{selectedItems}}" multi-selection selection-enabled>
+    <template is="dom-if" if="[[empty]]">
+      <p class="empty-info">No items to display.</p>
+    </template>
+    <iron-list id="list" items="[[items]]" selected-items="{{selectedItems}}" multi-selection selection-enabled hidden$="[[empty]]">
       <template>
         <div class$="saved-item [[_computeRowClass(selected)]]">
           <paper-icon-item tabindex$="[[tabIndex]]" aria-label$="Select/Deselect [[item.url]]">
@@ -338,6 +348,15 @@ Custom property | Description | Default
         value: function() {
           return this.$.list;
         }
+      },
+      /**
+       * If set the empty message will appear instead of list.
+       * This property is not computed by the element because of complex
+       * conditions that exists outside the scope of this element.
+       */
+      empty: {
+        type: Boolean,
+        value: false
       }
     },
 
