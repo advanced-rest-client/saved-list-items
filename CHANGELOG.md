@@ -1,3 +1,18 @@
+<a name="0.1.2"></a>
+## [0.1.2](https://github.com/advanced-rest-client/saved-list-items/compare/0.1.1...0.1.2) (2017-09-21)
+
+
+### Docs
+
+* Updated docs for the element ([2812cc01908118587295defb2d582391b77e4b11](https://github.com/advanced-rest-client/saved-list-items/commit/2812cc01908118587295defb2d582391b77e4b11))
+
+### New
+
+* Added empty state message ([55ab42b0a41acea5259b6822c7a3ba496e9a8c25](https://github.com/advanced-rest-client/saved-list-items/commit/55ab42b0a41acea5259b6822c7a3ba496e9a8c25))
+* Added new styling option. ([3c3d9265d801a9babd8c57a248a3da19961be1a5](https://github.com/advanced-rest-client/saved-list-items/commit/3c3d9265d801a9babd8c57a248a3da19961be1a5))
+
+
+
 <a name="0.1.1"></a>
 ## 0.1.1 (2017-09-20)
 
