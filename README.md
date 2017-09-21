@@ -4,34 +4,30 @@
 
 A `<saved-list-items>` element renders a list of fistory items.
 
-It should be used in a ARC requests saved list view.
+## Data model
+
+Each history item requires the following properties:
+
+-   `method` (String) HTTP method of the request
+-   `url` (String) The URL of the request
+-   `name` (String) Request name
 
 ## Example
-```
+
+```html
 <saved-list-items id="saved" items="[[list]]"></saved-list-items>
 ```
-The `list` attribute is a list of requests to display.
-The `list` will not change from the inside of the element and every state
-change is informed via events.
 
-It is safe to load a lot of results into the list. This element uses
-the `iron-list` element that renders only a potion of items only to fit
-available space.
+## List handing
+
+The element uses `<iron-list>` element that creates a virtual list containing
+limited number of child elements. It allows to load huge number of requests
+without harming the performance.
 
 ## Adding pagination
-Simplest solution is just to override the `items` array with new values.
-It will cause list reset though and it will jump to fisrt element.
-To avoid it you can use element's `addItems` function.
-However the element will not notify back change in the list so other elements
-or app will not notice element's array change.
 
-To avoid this update the array of items as follows:
-```
-const newItems = new Array(100);
-newItems.forEach((i) => this.push('existingItems', i));
-```
-It will push new elements - one by one - to the end of the array and notify
-paths each time the new element will be added.
+Simplest solution is to override the `items` array with new values.
+It causes list reset and the list jumps to the fisrt element. To avoid this behavior use element's `addItems` function.
 
 ### Styling
 `<history-list-items>` provides the following custom properties and mixins for styling:
@@ -48,6 +44,8 @@ Custom property | Description | Default
 `--saved-list-item-selected-background-color` | Selection color for list items. | `#E0E0E0`
 `--saved-list-items-selection-counter` | Mixin applied to the selection counter | `{}`
 `--saved-list-items-search-input` | Mixin applied to the search input | `{}`
+`--saved-list-items-header` | Mixin applied to the list header options section. | `{}`
+`--saved-list-items-list` | Mixin applied to the list (`iron-list`) | `{}`
 `--action-button` | Mixin apllied to the primary action buttons | `{}`
 `--secondary-action-button-color` | Color of the secondary action button | `--primary-color`
 `--arc-font-body1` | Mixin applied to the element | `{}`
