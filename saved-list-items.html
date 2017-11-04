@@ -26,6 +26,11 @@ the License.
 <link rel="import" href="../paper-item/paper-item-body.html">
 <link rel="import" href="../paper-tooltip/paper-tooltip.html">
 <link rel="import" href="../paper-toast/paper-toast.html">
+<link rel="import" href="../paper-menu-button/paper-menu-button.html">
+<link rel="import" href="../paper-icon-button/paper-icon-button.html">
+<link rel="import" href="../paper-listbox/paper-listbox.html">
+<link rel="import" href="../arc-icons/arc-icons.html">
+
 <!--
 A `<saved-list-items>` element renders a list of fistory items.
 
@@ -195,8 +200,23 @@ Custom property | Description | Default
       </span>
       <span class="selected-counter hiddable">[[selectedItems.length]] item(s) selected</span>
       <div class="selected-actions hiddable">
-        <paper-button class="main-action" data-action="export-all" raised on-tap="_exportSelected">Export</paper-button>
-        <paper-button class="secondary-action" data-action="delete-all" on-tap="_deleteSelected">Delete</paper-button>
+        <paper-menu-button dynamic-align id="mainMenu">
+          <paper-icon-button icon="arc:more-vert" class="dropdown-trigger"></paper-icon-button>
+          <paper-listbox class="dropdown-content" id="mainMenuOptions">
+            <paper-icon-item on-tap="_exportSelected" data-action="export-selected-file">
+              <iron-icon icon="arc:archive" item-icon></iron-icon>
+              Export to file
+            </paper-icon-item>
+            <paper-icon-item on-tap="_exportSelectedDrive" data-action="export-selected-drive">
+              <iron-icon icon="arc:drive-color" item-icon></iron-icon>
+              Export to Google Drive
+            </paper-icon-item>
+            <paper-icon-item data-action="delete-all" on-tap="_deleteSelected">
+              <iron-icon icon="arc:delete" item-icon></iron-icon>
+              Delete selected
+            </paper-icon-item>
+          </paper-listbox>
+        </paper-menu-button>
       </div>
       <div class="search">
         <paper-input label="Search" no-label-float value="{{keyword}}" type="search" on-search="_searchList"></paper-input>
@@ -252,6 +272,7 @@ Custom property | Description | Default
      * @event list-items-export
      * @param {Array} items List of items to be deleted. Each item is a request
      * object as passed to the `items` array.
+     * @param {String} destination Either `file` or `drive`.
      */
     /**
      * Fired when the user search the list.
@@ -523,8 +544,20 @@ Custom property | Description | Default
         bubbles: false
       });
     },
-    // Fires `list-items-export` event to export current selection.
+    // Fires `list-items-export` event to export current selection to a file
     _exportSelected: function() {
+      this._export('file');
+    },
+    // Fires `list-items-export` event to export current selection to Drive
+    _exportSelectedDrive: function() {
+      this._export('drive');
+    },
+    /**
+     * Fires `list-items-export` event
+     *
+     * @param {String} destination Either `file` or `drive`.
+     */
+    _export: function(destination) {
       var selected = this.selectedItems;
       if (!selected || !selected.length) {
         this.$.noSelectionToast.opened = true;
@@ -532,6 +565,7 @@ Custom property | Description | Default
       }
       this.fire('list-items-export', {
         items: selected,
+        destination: destination
       }, {
         bubbles: false
       });
