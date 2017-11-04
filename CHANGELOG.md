@@ -1,3 +1,14 @@
+<a name="0.2.1"></a>
+## [0.2.1](https://github.com/advanced-rest-client/saved-list-items/compare/0.1.3...0.2.1) (2017-11-04)
+
+
+### New
+
+* Added save to project option. ([910784507ddcbc9c7ab78f9d1f8d7954ce5a412b](https://github.com/advanced-rest-client/saved-list-items/commit/910784507ddcbc9c7ab78f9d1f8d7954ce5a412b))
+* Added selection option to export to Drive ([4b125ba8a03dbd835a8b5045255cb72faf1977d3](https://github.com/advanced-rest-client/saved-list-items/commit/4b125ba8a03dbd835a8b5045255cb72faf1977d3))
+
+
+
 <a name="0.1.3"></a>
 ## [0.1.3](https://github.com/advanced-rest-client/saved-list-items/compare/0.1.2...0.1.3) (2017-09-21)
 
