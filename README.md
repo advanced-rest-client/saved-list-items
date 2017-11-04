@@ -60,8 +60,10 @@ Custom property | Description | Default
 index **Number** - Object's index in the list. |
 | list-item-open | Fired when the user clicked on an open button on an item.  The event does not bubbles. | item **Object** - An object associated with this item. |
 index **Number** - Object's index in the list. |
+| list-items-add-project | Fired when the "add to a project" action was performed by the user. This operation must be handled by hosting application. | items **Array** - List of items to be added to a project |
 | list-items-delete | Fired when the user clicked on a delete button on an item or delete selected in the table header.  The event does not bubbles. | items **Array** - List of items to be deleted. Each item is a request object as passed to the `items` array. |
-| list-items-export | Fires when the user selects to export currently selected items.  The event does not bubbles. | items **Array** - List of items to be deleted. Each item is a request object as passed to the `items` array. |
+| list-items-export | Fires when the user selects to export currently selected items.  The event does not bubbles. | items **Array** - List of items to be exported. |
+destination **String** - Either `file` or `drive`. |
 | list-items-search | Fired when the user search the list.  The event does not bubbles. | q **String** - Search query. Can be empty when cleared. |
 | list-items-selection-changed | Fired when single item selection has changed. It isn't fired when multiple selection has changed at once.  The event does not bubbles. | item **Object** - The request object |
 index **Number** - Index of the item on the list |
