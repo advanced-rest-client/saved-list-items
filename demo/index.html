@@ -70,7 +70,8 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
           on-list-items-export="_onExport"
           on-list-items-search="_onSearch"
           on-list-items-selection-changed="_selChanged"
-          on-list-item-details="_onDetails"></saved-list-items>
+          on-list-item-details="_onDetails"
+          on-list-items-add-project="_onProject"></saved-list-items>
       </section>
 
       <section card>
@@ -136,6 +137,19 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         msg += ` (${items[0].method} ${items[0].url})`;
       } else {
         msg = size + ' list items export requested';
+      }
+      app.log(msg);
+      console.log(e);
+    };
+    app._onProject = function(e) {
+      var items = e.detail.items;
+      var size = items.length;
+      var msg = '';
+      if (size === 1) {
+        msg = 'List item to save in project';
+        msg += ` (${items[0].method} ${items[0].url})`;
+      } else {
+        msg = size + ' list items to save in project';
       }
       app.log(msg);
       console.log(e);

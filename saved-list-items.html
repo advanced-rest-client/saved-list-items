@@ -215,6 +215,10 @@ Custom property | Description | Default
               <iron-icon icon="arc:delete" item-icon></iron-icon>
               Delete selected
             </paper-icon-item>
+            <paper-icon-item data-action="project-selected" on-tap="_projectSelected">
+              <iron-icon icon="arc:collections-bookmark" item-icon></iron-icon>
+              Add selected to a project
+            </paper-icon-item>
           </paper-listbox>
         </paper-menu-button>
       </div>
@@ -270,9 +274,15 @@ Custom property | Description | Default
      * The event does not bubbles.
      *
      * @event list-items-export
-     * @param {Array} items List of items to be deleted. Each item is a request
-     * object as passed to the `items` array.
+     * @param {Array} items List of items to be exported.
      * @param {String} destination Either `file` or `drive`.
+     */
+    /**
+     * Fired when the "add to a project" action was performed by the user.
+     * This operation must be handled by hosting application.
+     *
+     * @event list-items-add-project
+     * @param {Array} items List of items to be added to a project
      */
     /**
      * Fired when the user search the list.
@@ -566,6 +576,19 @@ Custom property | Description | Default
       this.fire('list-items-export', {
         items: selected,
         destination: destination
+      }, {
+        bubbles: false
+      });
+    },
+    // Fires `list-items-add-project` custom event.
+    _projectSelected: function() {
+      var selected = this.selectedItems;
+      if (!selected || !selected.length) {
+        this.$.noSelectionToast.opened = true;
+        return;
+      }
+      this.fire('list-items-add-project', {
+        items: selected
       }, {
         bubbles: false
       });
