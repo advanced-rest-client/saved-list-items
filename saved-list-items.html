@@ -16,7 +16,6 @@ the License.
 <link rel="import" href="../paper-checkbox/paper-checkbox.html">
 <link rel="import" href="../paper-button/paper-button.html">
 <link rel="import" href="../iron-flex-layout/iron-flex-layout.html">
-<link rel="import" href="../iron-dropdown/iron-dropdown.html">
 <link rel="import" href="../paper-styles/shadow.html">
 <link rel="import" href="../iron-scroll-threshold/iron-scroll-threshold.html">
 <link rel="import" href="../paper-input/paper-input.html">
@@ -192,6 +191,22 @@ Custom property | Description | Default
       font-size: 16px;
       @apply --empty-info;
     }
+
+    .project-mark {
+      width: 16px;
+      height: 16px;
+      margin-left: 4px;
+      margin-right: 4px;
+    }
+
+    .item-details {
+      @apply --layout-horizontal;
+      @apply --layout-center;
+    }
+
+    .project-label {
+      font-weight: 500;
+    }
     </style>
     <section class$="table-options [[_computeOptionsTableClass(hasSelection)]]">
       <span>
@@ -200,9 +215,9 @@ Custom property | Description | Default
       </span>
       <span class="selected-counter hiddable">[[selectedItems.length]] item(s) selected</span>
       <div class="selected-actions hiddable">
-        <paper-menu-button dynamic-align id="mainMenu">
+        <paper-menu-button dynamic-align id="savedListMenu">
           <paper-icon-button icon="arc:more-vert" class="dropdown-trigger"></paper-icon-button>
-          <paper-listbox class="dropdown-content" id="mainMenuOptions">
+          <paper-listbox class="dropdown-content" id="savedListMenuOptions">
             <paper-icon-item on-tap="_exportSelected" data-action="export-selected-file">
               <iron-icon icon="arc:archive" item-icon></iron-icon>
               Export to file
@@ -239,7 +254,18 @@ Custom property | Description | Default
             </span>
             <paper-item-body two-line>
               <div class="url-label">[[item.url]]</div>
-              <div secondary><span data-action="name-edit" class="name" on-tap="_editName">[[item.name]]</span></div>
+              <div secondary class="item-details">
+                <span class="name">[[item.name]]</span>
+                <template is="dom-if" if="[[item.legacyProject]]">
+                  <span>
+                    <iron-icon icon="arc:collections-bookmark" class="project-mark"></iron-icon>
+                    <paper-tooltip>This request is a project item</paper-tooltip>
+                  </span>
+                  <template is="dom-if" if="[[projects]]">
+                    <span class="project-label">Project: [[_computeProjectLabel(item.legacyProject, projects)]]</span>
+                  </template>
+                </template>
+              </div>
             </paper-item-body>
             <paper-button class="secondary-action" data-action="item-detail" on-tap="_requestDetails">Details</paper-button>
             <paper-button class="main-action" data-action="open-item" on-tap="_navigateItem" raised>Open</paper-button>
@@ -248,11 +274,6 @@ Custom property | Description | Default
       </template>
     </iron-list>
     <iron-scroll-threshold id="scrollTheshold" lower-threshold="[[threshold]]" on-lower-threshold="_thresholdReached" scroll-target="[[_scrollTarget]]"></iron-scroll-threshold>
-    <iron-dropdown id="nameChange" always-on-top focus-target="[[_nameInput]]" on-iron-overlay-closed="_nameEditorClosed">
-      <div class="dropdown-content name-change-popover">
-        <paper-input label="Request name" id="nameChangeInput" on-keydown="_nameKeyDown"></paper-input>
-      </div>
-    </iron-dropdown>
     <paper-toast text="Select list item first" id="noSelectionToast"></paper-toast>
   </template>
   <script>
@@ -321,16 +342,6 @@ Custom property | Description | Default
      * @event list-items-threshold
      */
     /**
-     * Fired when the name of an item has changed in the UI and the changed
-     * schold be commited to the datastore.
-     *
-     * The event does not bubbles.
-     *
-     * @event list-item-name-changed
-     * @param {Object} item An object associated with this item.
-     * @param {Number} index Object's index in the list.
-     */
-    /**
      * Fired when the "request details" has been requested via this UI.
      * @event list-item-details
      * @param {Object} item An object associated with this item.
@@ -338,6 +349,8 @@ Custom property | Description | Default
     properties: {
       // The list of saved items to render.
       items: Array,
+      // List of projects to compute project label.
+      projects: Array,
       // List of selected items on the list.
       selectedItems: {
         type: Array,
@@ -454,45 +467,6 @@ Custom property | Description | Default
     _computeHasSelection: function(length) {
       return !!length;
     },
-    // Opens the name change popover over clicked name
-    _editName: function(e) {
-      e.preventDefault();
-      e.stopPropagation();
-      var name = e.model.get('item.name');
-
-      this.__currentEditModel = e.model;
-      this._nameInput.value = name;
-
-      e = Polymer.dom(e);
-      this.$.nameChange.positionTarget = e.localTarget.parentElement ||
-        e.localTarget;
-      this.$.nameChange.opened = true;
-    },
-    // Handles keydown event in name input. For enter it commits the change
-    _nameKeyDown: function(e) {
-      if (e.keyCode !== 13) {
-        return;
-      }
-      this._commitNameChange();
-    },
-    // Updates model with new name and sends `list-item-name-changed` event
-    _commitNameChange: function() {
-      var model = this.__currentEditModel;
-      var value = this._nameInput.value;
-      model.set('item.name', value);
-      this.fire('list-item-name-changed', {
-        item: model.get('item'),
-        index: model.get('index')
-      }, {
-        bubbles: false
-      });
-      this.$.nameChange.opened = false;
-    },
-    // Called when the name editor popover was closed
-    _nameEditorClosed: function() {
-      this.__currentEditModel = null;
-      this._nameInput.value = '';
-    },
     /**
      * Use this method to add new items to the `items` array.
      * It will prohibit list jumping while changing the list object manually
@@ -539,6 +513,7 @@ Custom property | Description | Default
      * Informs hosting application to delete currently selected items.
      */
     _deleteSelected: function() {
+      this._closeMenu();
       var selected = this.selectedItems;
       if (!selected || !selected.length) {
         this.$.noSelectionToast.opened = true;
@@ -556,10 +531,12 @@ Custom property | Description | Default
     },
     // Fires `list-items-export` event to export current selection to a file
     _exportSelected: function() {
+      this._closeMenu();
       this._export('file');
     },
     // Fires `list-items-export` event to export current selection to Drive
     _exportSelectedDrive: function() {
+      this._closeMenu();
       this._export('drive');
     },
     /**
@@ -582,6 +559,7 @@ Custom property | Description | Default
     },
     // Fires `list-items-add-project` custom event.
     _projectSelected: function() {
+      this._closeMenu();
       var selected = this.selectedItems;
       if (!selected || !selected.length) {
         this.$.noSelectionToast.opened = true;
@@ -622,6 +600,21 @@ Custom property | Description | Default
       }, {
         bubbles: false
       });
+    },
+    // Closes list menu and resets selection.
+    _closeMenu: function() {
+      this.$.savedListMenu.opened = false;
+      Polymer.RenderStatus.afterNextRender(this, function() {
+        this.$.savedListMenuOptions.selected = -1;
+      });
+    },
+
+    _computeProjectLabel: function(projectId, projects) {
+      if (!projects || !projectId) {
+        return '';
+      }
+      var project = projects.find(item => item._id === projectId);
+      return project ? project.name : '';
     }
   });
   </script>

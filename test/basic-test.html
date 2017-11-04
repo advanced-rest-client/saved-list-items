@@ -36,7 +36,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       setup(function() {
         element = fixture('basic');
         var data = DataGenerator.generateRequests(100);
-        element.items = data;
+        element.items = data.requests;
         TestHelpers.forceXIfStamp(element);
       });
 
@@ -49,13 +49,14 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         .querySelector('[data-action="' + action + '"]');
       }
 
-      test('Selects an item', function() {
+      test('Selects an item', function(done) {
         var node = actionElement('select-item');
-        MockInteractions.tap(node);
+        MockInteractions.tap(node.parentNode);
         setTimeout(function() {
           assert.typeOf(element.selectedItems, 'array', 'selectedItems is an array');
           assert.lengthOf(element.selectedItems, 1, 'selectedItems has one selected item');
-        }, 100);
+          done();
+        }, 10);
       });
 
       test('Fires list-item-details custom event', function() {
@@ -161,38 +162,6 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         assert.equal(cnt, 1, 'Event called once');
         assert.typeOf(eventData.items, 'array', 'Event contains list of items');
         assert.lengthOf(eventData.items, 1, 'Event contain one item');
-      });
-
-      test('Opens name change dialog', function() {
-        assert.notOk(element.__currentEditModel, '__currentEditModel is not set');
-        var node = actionElement('name-edit');
-        MockInteractions.tap(node);
-
-        assert.ok(element.__currentEditModel, '__currentEditModel is set');
-        assert.isTrue(element.$$('#nameChange').opened, 'The popover is opened');
-        assert.equal(element.$$('#nameChangeInput').value, element.items[0].name,
-          'Item\'s name is set in the input');
-      });
-
-      test('Fires list-item-name-changed event', function() {
-        var node = actionElement('name-edit');
-        MockInteractions.tap(node);
-        const NAME = 'TEST-name';
-        element.$$('#nameChangeInput').value = NAME;
-
-        var eventData;
-        var cnt = 0;
-        element.addEventListener('list-item-name-changed', function(e) {
-          eventData = e.detail;
-          cnt++;
-        });
-
-        element._commitNameChange();
-        assert.typeOf(eventData, 'object', 'Event was fired');
-        assert.equal(cnt, 1, 'Event called once');
-        assert.typeOf(eventData.item, 'object', 'Item is an object');
-        assert.typeOf(eventData.index, 'number', 'Index is a number');
-        assert.equal(eventData.item.name, NAME, 'Item has updated name');
       });
     });
     </script>
