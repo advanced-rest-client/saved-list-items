@@ -87,7 +87,8 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
     /* global DataGenerator */
     app._loadNext = () => {
       var data = DataGenerator.generateRequests(100);
-      app.$.saved.addItems(data);
+      app.$.saved.addItems(data.requests);
+      app.$.saved.projects = data.projects;
       let msg = 'Lower threshold reached.';
       app.log(msg);
     };

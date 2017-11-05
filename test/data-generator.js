@@ -3,6 +3,7 @@ const DataGenerator = {};
 
 DataGenerator.generateHistoryItem = () => {
   var isPayload = chance.bool();
+  var isProject = chance.bool();
   var payloadMethods = ['POST', 'PUT', 'DELETE', 'OPTIONS'];
   var otherMethods = ['GET', 'HEAD'];
   var headersSize = chance.integer({
@@ -33,13 +34,32 @@ DataGenerator.generateHistoryItem = () => {
   };
   item._id = encodeURIComponent(requestName) +
     '/' + encodeURIComponent(item.url) + '/' + item.method;
-  return item;
+  if (isProject) {
+    item.legacyProject = chance.word();
+    item._id += '/' + item.legacyProject;
+  }
+  return {
+    item: item,
+    project: isProject ? {
+      _id: item.legacyProject,
+      name: item.legacyProject,
+      order: 0
+    } : undefined
+  };
 };
 
 DataGenerator.generateRequests = function(size) {
   var list = [];
+  var projects = [];
   for (var i = 0; i < size; i++) {
-    list.push(DataGenerator.generateHistoryItem());
+    let item = DataGenerator.generateHistoryItem();
+    list.push(item.item);
+    if (item.project) {
+      projects.push(item.project);
+    }
   }
-  return list;
+  return {
+    requests: list,
+    projects: projects
+  };
 };

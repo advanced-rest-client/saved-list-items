@@ -1,5 +1,6 @@
 {
   "lint": {
-    "rules": ["polymer-1"]
+    "rules": ["polymer-2-hybrid"],
+    "ignoreWarnings": ["databind-with-unknown-property"]
   }
 }
