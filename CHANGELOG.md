@@ -1,3 +1,17 @@
+<a name="0.3.1"></a>
+## [0.3.1](https://github.com/advanced-rest-client/saved-list-items/compare/0.2.2...0.3.1) (2017-11-05)
+
+
+### Breaking
+
+* Removed name change. Added project data. ([c6ccaf794b96f36ab4cf008bd40c25ed00cd3b22](https://github.com/advanced-rest-client/saved-list-items/commit/c6ccaf794b96f36ab4cf008bd40c25ed00cd3b22))
+
+### Fix
+
+* Fixing test for FF ([ee7a818c4d3de962bbd909a87e78e9e7db221492](https://github.com/advanced-rest-client/saved-list-items/commit/ee7a818c4d3de962bbd909a87e78e9e7db221492))
+
+
+
 <a name="0.2.2"></a>
 ## [0.2.2](https://github.com/advanced-rest-client/saved-list-items/compare/0.2.1...0.2.2) (2017-11-04)
 
